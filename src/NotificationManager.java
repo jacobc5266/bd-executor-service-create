@@ -1,6 +1,8 @@
 
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class NotificationManager {
 
@@ -10,6 +12,12 @@ public class NotificationManager {
      */
     public void sendSaleNotificationsOut(List<NotificationTask> tasks) {
         //Implement this method
+        ExecutorService threadPool = Executors.newCachedThreadPool();
+
+        for (NotificationTask task : tasks) {
+            threadPool.submit(task);
+        }
+        threadPool.shutdown();
     }
 
 }
